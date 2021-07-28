@@ -12,31 +12,28 @@ type Data = {
   id: string;
 };
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  const preference: CreatePreferencePayload = {
-    items: [
-      {
-        title: req.body.description,
-        unit_price: Number(req.body.price),
-        quantity: Number(req.body.quantity),
+const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+  try {
+    const preference: CreatePreferencePayload = {
+      items: [
+        {
+          title: req.body.description,
+          unit_price: Number(req.body.price),
+          quantity: Number(req.body.quantity),
+        },
+      ],
+      back_urls: {
+        success: `${req.headers.origin}/api/feedback`,
+        failure: `${req.headers.origin}/api/feedback`,
+        pending: `${req.headers.origin}/api/feedback`,
       },
-    ],
-    back_urls: {
-      success: `${req.headers.origin}/api/feedback`,
-      failure: `${req.headers.origin}/api/feedback`,
-      pending: `${req.headers.origin}/api/feedback`,
-    },
-    auto_return: 'approved',
-  };
-  mercadopago.preferences
-    .create(preference)
-    .then((response: PreferenceCreateResponse) => {
-      res.status(200).json({ id: response.body.id });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-}
+      auto_return: 'approved',
+    };
+    const response = await mercadopago.preferences.create(preference);
+    res.status(200).json({ id: response.body.id });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default handler;

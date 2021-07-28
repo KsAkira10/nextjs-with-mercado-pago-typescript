@@ -7,13 +7,11 @@ interface FeedbackBody {
   MerchantOrder: string | string[];
 }
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<FeedbackBody>
-) {
+const handler = (req: NextApiRequest, res: NextApiResponse<FeedbackBody>) =>
   res.status(200).json({
     Payment: req.query.payment_id,
     Status: req.query.status,
     MerchantOrder: req.query.merchant_order_id,
   });
-}
+
+export default handler;

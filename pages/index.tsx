@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import React, {
   useCallback,
   useEffect,
@@ -122,12 +121,11 @@ const ShoppingCart = () => {
                         <div className='product-details'>
                           <div className='row justify-content-md-center'>
                             <div className='col-md-3'>
-                              <Image
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                 className='img-fluid mx-auto d-block image'
-                                src='/static/media/images/product.png'
+                                src='/images/product.png'
                                 alt='products'
-                                width={400}
-                                height={539}
                               />
                             </div>
                             <div className='col-md-4 product-detail'>
@@ -246,12 +244,11 @@ const ShoppingCart = () => {
       </main>
       <footer>
         <div className='footer_logo'>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             id='horizontal_logo'
-            src='/static/media/images/horizontal_logo.png'
+            src='/images/horizontal_logo.png'
             alt='Mercado Pago'
-            width={2002}
-            height={522}
           />
         </div>
         <div className='footer_text'>

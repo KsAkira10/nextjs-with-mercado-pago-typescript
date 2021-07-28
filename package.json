@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "next": "next",
+    "dev": "yarn next dev",
+    "prebuild": "yarn rimraf ./api && yarn naf",
+    "build": "yarn next build",
+    "postbuild": "yarn next export",
+    "start": "yarn next start",
+    "lint": "yarn next lint",
+    "naf": "yarn node ./node_modules/.bin/nextjs-azure-function"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
@@ -23,6 +27,9 @@
     "@types/react": "latest",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
-    "typescript": "latest"
+    "nextjs-azure-function": "^1.0.13",
+    "rimraf": "^3.0.2",
+    "typescript": "latest",
+    "yarn": "^1.22.11"
   }
 }
